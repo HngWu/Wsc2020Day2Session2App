@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dc85df62546f4bf183b574da7cb46702" Name="Diagram1">
+        <EntityTypeShape EntityType="wsc2020Day2Session2Model.Area" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="wsc2020Day2Session2Model.AreaCompetition" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="wsc2020Day2Session2Model.AreaCriteria" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="wsc2020Day2Session2Model.CompetitorSubmission" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="wsc2020Day2Session2Model.Score" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="wsc2020Day2Session2Model.sysdiagram" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="wsc2020Day2Session2Model.User" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="wsc2020Day2Session2Model.UserType" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <AssociationConnector Association="wsc2020Day2Session2Model.FK_AreaCriteria_Area" ManuallyRouted="false" />
+        <AssociationConnector Association="wsc2020Day2Session2Model.FK_User_Area" ManuallyRouted="false" />
+        <AssociationConnector Association="wsc2020Day2Session2Model.FK_AreaCompetition_AreaCompetition" ManuallyRouted="false" />
+        <AssociationConnector Association="wsc2020Day2Session2Model.FK_CompetitorSubmission_AreaCompetition" ManuallyRouted="false" />
+        <AssociationConnector Association="wsc2020Day2Session2Model.FK_Score_AreaCompetition" ManuallyRouted="false" />
+        <AssociationConnector Association="wsc2020Day2Session2Model.FK_Score_AreaCriteria" ManuallyRouted="false" />
+        <AssociationConnector Association="wsc2020Day2Session2Model.FK_CompetitorSubmission_User" ManuallyRouted="false" />
+        <AssociationConnector Association="wsc2020Day2Session2Model.FK_Score_User" ManuallyRouted="false" />
+        <AssociationConnector Association="wsc2020Day2Session2Model.FK_User_UserType" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,299 @@
+[
+  {
+    "SKU": "1001",
+    "name": "Chicken Caesar Wrap",
+    "description": "Grilled chicken, romaine lettuce, parmesan cheese, and Caesar dressing in a whole wheat wrap.",
+    "category": "mains",
+    "price": 10.99,
+    "photo": "photos/1001.jpg",
+    "availability": "in_stock"
+  },
+  {
+    "SKU": "1002",
+    "name": "Veggie Sandwich",
+    "description": "Fresh vegetables, hummus, and pesto on whole grain bread.",
+    "category": "mains",
+    "price": 9.99,
+    "photo": "photos/1002.jpg",
+    "availability": "in_stock"
+  },
+  {
+    "SKU": "1003",
+    "name": "Tuna Salad",
+    "description": "Tuna mixed with mayo, celery, and onion on a bed of lettuce with cherry tomatoes and cucumbers.",
+    "category": "mains",
+    "price": 11.99,
+    "photo": "photos/1003.jpg",
+    "availability": "in_stock"
+  },
+  {
+    "SKU": "1004",
+    "name": "Quinoa Bowl",
+    "description": "Quinoa, black beans, avocado, corn, and salsa.",
+    "category": "mains",
+    "price": 12.99,
+    "photo": "photos/1004.jpg",
+    "availability": "in_stock"
+  },
+  {
+    "SKU": "1005",
+    "name": "Turkey Club Sandwich",
+    "description": "Sliced turkey, bacon, lettuce, tomato, and mayo on toasted bread.",
+    "category": "mains",
+    "price": 10.99,
+    "photo": "photos/1005.jpg",
+    "availability": "in_stock"
+  },
+  {
+    "SKU": "1006",
+    "name": "Cheese Pizza",
+    "description": "Classic cheese pizza with tomato sauce and mozzarella.",
+    "category": "mains",
+    "price": 8.99,
+    "photo": "photos/1006.jpg",
+    "availability": "in_stock"
+  },
+  {
+    "SKU": "2001",
+    "name": "Potato Chips",
+    "description": "Classic, crispy potato chips.",
+    "category": "snacks",
+    "price": 1.99,
+    "photo": "photos/2001.jpg",
+    "availability": "in_stock"
+  },
+  {
+    "SKU": "2002",
+    "name": "Mixed Nuts",
+    "description": "A blend of almonds, cashews, peanuts, and walnuts.",
+    "category": "snacks",
+    "price": 2.99,
+    "photo": "photos/2002.jpg",
+    "availability": "in_stock"
+},
+{
+"SKU": "2003",
+"name": "Fruit Cup",
+"description": "A mix of fresh seasonal fruit.",
+"category": "snacks",
+"price": 3.99,
+"photo": "photos/2003.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "2004",
+"name": "Granola Bar",
+"description": "A nutritious, high-fiber granola bar.",
+"category": "snacks",
+"price": 1.49,
+"photo": "photos/2004.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "2005",
+"name": "Chocolate Chip Cookie",
+"description": "A delicious, freshly baked chocolate chip cookie.",
+"category": "snacks",
+"price": 1.99,
+"photo": "photos/2005.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "2006",
+"name": "Pretzels",
+"description": "Salty, crunchy pretzels.",
+"category": "snacks",
+"price": 1.99,
+"photo": "photos/2006.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "3001",
+"name": "Coca-Cola",
+"description": "Classic Coca-Cola.",
+"category": "drinks",
+"price": 2.49,
+"photo": "photos/3001.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "3002",
+"name": "Sprite",
+"description": "Crisp, refreshing lemon-lime soda.",
+"category": "drinks",
+"price": 2.49,
+"photo": "photos/3002.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "3003",
+"name": "Orange Juice",
+"description": "Freshly squeezed orange juice.",
+"category": "drinks",
+"price": 3.49,
+"photo": "photos/3003.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "3004",
+"name": "Water",
+"description": "Bottled spring water.",
+"category": "drinks",
+"price": 1.99,
+"photo": "photos/3004.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "3005",
+"name": "Coffee",
+"description": "Freshly brewed hot coffee.",
+"category": "drinks",
+"price": 2.99,
+"photo": "photos/3005.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "3006",
+"name": "Green Tea",
+"description": "Hot, soothing green tea.",
+"category": "drinks",
+"price": 2.49,
+"photo": "photos/3006.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "3007",
+"name": "Red Wine",
+"description": "A glass of full-bodied red wine.",
+"category": "drinks",
+"price": 7.99,
+"photo": "photos/3007.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "3008",
+"name": "White Wine",
+"description": "A glass of refreshing white wine.",
+"category": "drinks",
+"price": 7.99,
+"photo": "photos/3008.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "3009",
+"name": "Beer",
+"description": "A cold, refreshing beer.",
+"category": "drinks",
+"price": 5.99,
+"photo": "photos/3009.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "3010",
+"name": "Iced Tea",
+"description": "A cool, refreshing iced tea.",
+"category": "drinks",
+"price": 2.99,
+"photo": "photos/3010.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "3011",
+"name": "Lemonade",
+"description": "A refreshing glass of lemonade.",
+"category": "drinks",
+"price": 2.99,
+"photo": "photos/3011.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "3012",
+"name": "Ginger Ale",
+"description": "A crisp, refreshing ginger ale.",
+"category": "drinks",
+"price": 2.49,
+"photo": "photos/3012.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "3013",
+"name": "Smoothie",
+"description": "A delicious, fruity smoothie.",
+"category": "drinks",
+"price": 4.99,
+"photo": "photos/3013.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "3014",
+"name": "Sparkling Water",
+"description": "A refreshing bottle of sparkling water.",
+"category": "drinks",
+"price": 2.49,
+"photo": "photos/3014.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "3015",
+"name": "Hot Chocolate",
+"description": "A warm, creamy cup of hot chocolate.",
+"category": "drinks",
+"price": 3.49,
+"photo": "photos/3015.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "4001",
+"name": "Caesar Salad",
+"description": "Romaine lettuce, parmesan cheese, croutons, and Caesar dressing.",
+"category": "sides",
+"price": 5.99,
+"photo": "photos/4001.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "4002",
+"name": "Garlic Bread",
+"description": "Warm, buttery garlic bread.",
+"category": "sides",
+"price": 4.99,
+"photo": "photos/4002.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "4003",
+"name": "French Fries",
+"description": "Crispy, golden French fries.",
+"category": "sides",
+"price": 3.99,
+"photo": "photos/4003.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "4004",
+"name": "Sweet Potato Fries",
+"description": "Delicious, crispy sweet potato fries.",
+"category": "sides",
+"price": 4.49,
+"photo": "photos/4004.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "4005",
+"name": "Coleslaw",
+"description": "A tangy, creamy coleslaw.",
+"category": "sides",
+"price": 3.49,
+"photo": "photos/4005.jpg",
+"availability": "in_stock"
+},
+{
+"SKU": "4006",
+"name": "Mashed Potatoes",
+"description": "Creamy, buttery mashed potatoes.",
+"category": "sides",
+"price": 3.99,
+"photo": "photos/4006.jpg",
+"availability": "in_stock"
+}
+] 

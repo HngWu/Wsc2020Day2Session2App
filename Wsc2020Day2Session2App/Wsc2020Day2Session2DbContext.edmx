@@ -1,0 +1,592 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="wsc2020Day2Session2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="area" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AreaCompetition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="areaId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="round" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AreaCriteria">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="areaId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="criteria" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="maximumMarks" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompetitorSubmission">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="areaCompetitionId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="competitorId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="attempt" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="marked" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Score">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="competitorId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="areaCriteriaId" Type="int" Nullable="false" />
+          <Property Name="areaCompetitionId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CompetitionSubmissionId" Type="int" Nullable="false" />
+          <Property Name="score" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="userTypeId" Type="int" Nullable="false" />
+          <Property Name="areaId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AreaCriteria_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="AreaCriteria" Type="Self.AreaCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AreaCriteria">
+              <PropertyRef Name="areaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompetitorSubmission_AreaCompetition">
+          <End Role="AreaCompetition" Type="Self.AreaCompetition" Multiplicity="1" />
+          <End Role="CompetitorSubmission" Type="Self.CompetitorSubmission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AreaCompetition">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompetitorSubmission">
+              <PropertyRef Name="areaCompetitionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompetitorSubmission_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="CompetitorSubmission" Type="Self.CompetitorSubmission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompetitorSubmission">
+              <PropertyRef Name="competitorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Score_AreaCompetition">
+          <End Role="AreaCompetition" Type="Self.AreaCompetition" Multiplicity="1" />
+          <End Role="Score" Type="Self.Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AreaCompetition">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Score">
+              <PropertyRef Name="areaCompetitionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Score_AreaCriteria">
+          <End Role="AreaCriteria" Type="Self.AreaCriteria" Multiplicity="1" />
+          <End Role="Score" Type="Self.Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AreaCriteria">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Score">
+              <PropertyRef Name="areaCriteriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Score_CompetitorSubmission">
+          <End Role="CompetitorSubmission" Type="Self.CompetitorSubmission" Multiplicity="1" />
+          <End Role="Score" Type="Self.Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompetitorSubmission">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Score">
+              <PropertyRef Name="CompetitionSubmissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Score_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Score" Type="Self.Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Score">
+              <PropertyRef Name="competitorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="areaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserType">
+          <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="userTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="wsc2020Day2Session2ModelStoreContainer">
+          <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AreaCompetition" EntityType="Self.AreaCompetition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AreaCriteria" EntityType="Self.AreaCriteria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompetitorSubmission" EntityType="Self.CompetitorSubmission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Score" EntityType="Self.Score" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AreaCriteria_Area" Association="Self.FK_AreaCriteria_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="AreaCriteria" EntitySet="AreaCriteria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompetitorSubmission_AreaCompetition" Association="Self.FK_CompetitorSubmission_AreaCompetition">
+            <End Role="AreaCompetition" EntitySet="AreaCompetition" />
+            <End Role="CompetitorSubmission" EntitySet="CompetitorSubmission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompetitorSubmission_User" Association="Self.FK_CompetitorSubmission_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="CompetitorSubmission" EntitySet="CompetitorSubmission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Score_AreaCompetition" Association="Self.FK_Score_AreaCompetition">
+            <End Role="AreaCompetition" EntitySet="AreaCompetition" />
+            <End Role="Score" EntitySet="Score" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Score_AreaCriteria" Association="Self.FK_Score_AreaCriteria">
+            <End Role="AreaCriteria" EntitySet="AreaCriteria" />
+            <End Role="Score" EntitySet="Score" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Score_CompetitorSubmission" Association="Self.FK_Score_CompetitorSubmission">
+            <End Role="CompetitorSubmission" EntitySet="CompetitorSubmission" />
+            <End Role="Score" EntitySet="Score" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Score_User" Association="Self.FK_Score_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Score" EntitySet="Score" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Area" Association="Self.FK_User_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserType" Association="Self.FK_User_UserType">
+            <End Role="UserType" EntitySet="UserType" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="wsc2020Day2Session2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="area1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AreaCriterias" Relationship="Self.FK_AreaCriteria_Area" FromRole="Area" ToRole="AreaCriteria" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_Area" FromRole="Area" ToRole="User" />
+        </EntityType>
+        <EntityType Name="AreaCompetition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="areaId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="round" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CompetitorSubmissions" Relationship="Self.FK_CompetitorSubmission_AreaCompetition" FromRole="AreaCompetition" ToRole="CompetitorSubmission" />
+          <NavigationProperty Name="Scores" Relationship="Self.FK_Score_AreaCompetition" FromRole="AreaCompetition" ToRole="Score" />
+        </EntityType>
+        <EntityType Name="AreaCriteria">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="areaId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="criteria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="maximumMarks" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Area" Relationship="Self.FK_AreaCriteria_Area" FromRole="AreaCriteria" ToRole="Area" />
+          <NavigationProperty Name="Scores" Relationship="Self.FK_Score_AreaCriteria" FromRole="AreaCriteria" ToRole="Score" />
+        </EntityType>
+        <EntityType Name="CompetitorSubmission">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="areaCompetitionId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="competitorId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="attempt" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="marked" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AreaCompetition" Relationship="Self.FK_CompetitorSubmission_AreaCompetition" FromRole="CompetitorSubmission" ToRole="AreaCompetition" />
+          <NavigationProperty Name="User" Relationship="Self.FK_CompetitorSubmission_User" FromRole="CompetitorSubmission" ToRole="User" />
+          <NavigationProperty Name="Scores" Relationship="Self.FK_Score_CompetitorSubmission" FromRole="CompetitorSubmission" ToRole="Score" />
+        </EntityType>
+        <EntityType Name="Score">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="competitorId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="areaCriteriaId" Type="Int32" Nullable="false" />
+          <Property Name="areaCompetitionId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompetitionSubmissionId" Type="Int32" Nullable="false" />
+          <Property Name="score1" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="AreaCompetition" Relationship="Self.FK_Score_AreaCompetition" FromRole="Score" ToRole="AreaCompetition" />
+          <NavigationProperty Name="AreaCriteria" Relationship="Self.FK_Score_AreaCriteria" FromRole="Score" ToRole="AreaCriteria" />
+          <NavigationProperty Name="CompetitorSubmission" Relationship="Self.FK_Score_CompetitorSubmission" FromRole="Score" ToRole="CompetitorSubmission" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Score_User" FromRole="Score" ToRole="User" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userTypeId" Type="Int32" Nullable="false" />
+          <Property Name="areaId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Area" Relationship="Self.FK_User_Area" FromRole="User" ToRole="Area" />
+          <NavigationProperty Name="CompetitorSubmissions" Relationship="Self.FK_CompetitorSubmission_User" FromRole="User" ToRole="CompetitorSubmission" />
+          <NavigationProperty Name="Scores" Relationship="Self.FK_Score_User" FromRole="User" ToRole="Score" />
+          <NavigationProperty Name="UserType" Relationship="Self.FK_User_UserType" FromRole="User" ToRole="UserType" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_UserType" FromRole="UserType" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_AreaCriteria_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="AreaCriteria" Type="Self.AreaCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AreaCriteria">
+              <PropertyRef Name="areaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="areaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompetitorSubmission_AreaCompetition">
+          <End Role="AreaCompetition" Type="Self.AreaCompetition" Multiplicity="1" />
+          <End Role="CompetitorSubmission" Type="Self.CompetitorSubmission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AreaCompetition">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompetitorSubmission">
+              <PropertyRef Name="areaCompetitionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Score_AreaCompetition">
+          <End Role="AreaCompetition" Type="Self.AreaCompetition" Multiplicity="1" />
+          <End Role="Score" Type="Self.Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AreaCompetition">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Score">
+              <PropertyRef Name="areaCompetitionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Score_AreaCriteria">
+          <End Role="AreaCriteria" Type="Self.AreaCriteria" Multiplicity="1" />
+          <End Role="Score" Type="Self.Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AreaCriteria">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Score">
+              <PropertyRef Name="areaCriteriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompetitorSubmission_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="CompetitorSubmission" Type="Self.CompetitorSubmission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompetitorSubmission">
+              <PropertyRef Name="competitorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Score_CompetitorSubmission">
+          <End Role="CompetitorSubmission" Type="Self.CompetitorSubmission" Multiplicity="1" />
+          <End Role="Score" Type="Self.Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompetitorSubmission">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Score">
+              <PropertyRef Name="CompetitionSubmissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Score_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Score" Type="Self.Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Score">
+              <PropertyRef Name="competitorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserType">
+          <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="userTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Wsc2020Day2Session2DbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Areas" EntityType="Self.Area" />
+          <EntitySet Name="AreaCompetitions" EntityType="Self.AreaCompetition" />
+          <EntitySet Name="AreaCriterias" EntityType="Self.AreaCriteria" />
+          <EntitySet Name="CompetitorSubmissions" EntityType="Self.CompetitorSubmission" />
+          <EntitySet Name="Scores" EntityType="Self.Score" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserTypes" EntityType="Self.UserType" />
+          <AssociationSet Name="FK_AreaCriteria_Area" Association="Self.FK_AreaCriteria_Area">
+            <End Role="Area" EntitySet="Areas" />
+            <End Role="AreaCriteria" EntitySet="AreaCriterias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Area" Association="Self.FK_User_Area">
+            <End Role="Area" EntitySet="Areas" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompetitorSubmission_AreaCompetition" Association="Self.FK_CompetitorSubmission_AreaCompetition">
+            <End Role="AreaCompetition" EntitySet="AreaCompetitions" />
+            <End Role="CompetitorSubmission" EntitySet="CompetitorSubmissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Score_AreaCompetition" Association="Self.FK_Score_AreaCompetition">
+            <End Role="AreaCompetition" EntitySet="AreaCompetitions" />
+            <End Role="Score" EntitySet="Scores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Score_AreaCriteria" Association="Self.FK_Score_AreaCriteria">
+            <End Role="AreaCriteria" EntitySet="AreaCriterias" />
+            <End Role="Score" EntitySet="Scores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompetitorSubmission_User" Association="Self.FK_CompetitorSubmission_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CompetitorSubmission" EntitySet="CompetitorSubmissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Score_CompetitorSubmission" Association="Self.FK_Score_CompetitorSubmission">
+            <End Role="CompetitorSubmission" EntitySet="CompetitorSubmissions" />
+            <End Role="Score" EntitySet="Scores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Score_User" Association="Self.FK_Score_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Score" EntitySet="Scores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserType" Association="Self.FK_User_UserType">
+            <End Role="UserType" EntitySet="UserTypes" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="wsc2020Day2Session2ModelStoreContainer" CdmEntityContainer="Wsc2020Day2Session2DbContext">
+          <EntitySetMapping Name="Areas">
+            <EntityTypeMapping TypeName="wsc2020Day2Session2Model.Area">
+              <MappingFragment StoreEntitySet="Area">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="area1" ColumnName="area" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AreaCompetitions">
+            <EntityTypeMapping TypeName="wsc2020Day2Session2Model.AreaCompetition">
+              <MappingFragment StoreEntitySet="AreaCompetition">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="areaId" ColumnName="areaId" />
+                <ScalarProperty Name="round" ColumnName="round" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AreaCriterias">
+            <EntityTypeMapping TypeName="wsc2020Day2Session2Model.AreaCriteria">
+              <MappingFragment StoreEntitySet="AreaCriteria">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="areaId" ColumnName="areaId" />
+                <ScalarProperty Name="criteria" ColumnName="criteria" />
+                <ScalarProperty Name="maximumMarks" ColumnName="maximumMarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompetitorSubmissions">
+            <EntityTypeMapping TypeName="wsc2020Day2Session2Model.CompetitorSubmission">
+              <MappingFragment StoreEntitySet="CompetitorSubmission">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="areaCompetitionId" ColumnName="areaCompetitionId" />
+                <ScalarProperty Name="competitorId" ColumnName="competitorId" />
+                <ScalarProperty Name="attempt" ColumnName="attempt" />
+                <ScalarProperty Name="marked" ColumnName="marked" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scores">
+            <EntityTypeMapping TypeName="wsc2020Day2Session2Model.Score">
+              <MappingFragment StoreEntitySet="Score">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="competitorId" ColumnName="competitorId" />
+                <ScalarProperty Name="areaCriteriaId" ColumnName="areaCriteriaId" />
+                <ScalarProperty Name="areaCompetitionId" ColumnName="areaCompetitionId" />
+                <ScalarProperty Name="CompetitionSubmissionId" ColumnName="CompetitionSubmissionId" />
+                <ScalarProperty Name="score1" ColumnName="score" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="wsc2020Day2Session2Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="wsc2020Day2Session2Model.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userTypeId" ColumnName="userTypeId" />
+                <ScalarProperty Name="areaId" ColumnName="areaId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTypes">
+            <EntityTypeMapping TypeName="wsc2020Day2Session2Model.UserType">
+              <MappingFragment StoreEntitySet="UserType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userTypeName" ColumnName="userTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
